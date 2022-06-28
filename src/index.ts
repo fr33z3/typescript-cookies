@@ -21,7 +21,7 @@ export class Cookies {
   doc: Document
   options: Options
 
-  constructor(config?: Options & { document: Document }) {
+  constructor(config?: Options & { document?: Document }) {
     const { document, ...options } = config ?? {}
     this.options = options ?? {}
     this.doc = document ?? window.document
