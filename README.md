@@ -67,3 +67,18 @@ cookies.set('cookie-name', 'cookie-value', {
   samesite: 'none',
 })
 ```
+
+## Global options
+You can globally set options for set function if manually initialize ```Cookies``` class
+
+```js
+  import {Cookies} from 'typescript-cookies'
+
+  const cookies = new Cookies({
+    path: '/',
+    expires: 7,
+    domain: 'www.google.com',
+    secure: true,
+    samesite: 'none',
+  })
+```
