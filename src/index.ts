@@ -1,3 +1,5 @@
+import { compact } from './utils'
+
 const daysPower = 24 * 60 * 60 * 1000
 
 type SetOptions = {
@@ -7,6 +9,12 @@ type SetOptions = {
   domain?: string
   secure?: boolean
   samesite?: 'lax' | 'strict' | 'none'
+}
+
+function getExpirationDateStr(value: number | Date): string {
+  if (typeof value !== 'number') return value.toUTCString()
+
+  return new Date(Date.now() + value * daysPower).toUTCString()
 }
 
 export class Cookies {
@@ -32,18 +40,17 @@ export class Cookies {
 
   set(name: string, value: string, options: SetOptions = {}) {
     const { expires, maxAge, path = '/', domain, secure, samesite } = options
-    let cookieString = `${name}=${encodeURIComponent(value)}`
+    
+    const cookieString = compact([
+      `${name}=${encodeURIComponent(value)}`,
+      `path=${path}`,
+      domain ? `domain=${domain}` : null,
+      maxAge ? `max-age=${maxAge}` : null,
+      expires ? `expires=${getExpirationDateStr(expires)}` : null,
+      secure ? 'secure' : null,
+      samesite ? `samesite=${samesite}` : null,
+    ]).join(';')
 
-    cookieString = `${cookieString};path=${path}`
-    if (domain) cookieString = `${cookieString};domain=${domain}`
-    if (maxAge) cookieString = `${cookieString};max-age=${maxAge}`
-    if (expires) {
-      const date =
-        typeof expires === 'number' ? new Date(Date.now() + expires * daysPower) : expires
-      cookieString = `${cookieString};expires=${date.toUTCString()}`
-    }
-    if (secure) cookieString = `${cookieString};secure`
-    if (samesite) cookieString = `${cookieString};samesite=${samesite}`
     this.doc.cookie = cookieString
   }
 
