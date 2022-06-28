@@ -1,0 +1,15 @@
+{
+  "name": "typescript-cookies",
+  "version": "0.0.1",
+  "description": "Typescript cookies module",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "typescript",
+    "cookies"
+  ],
+  "author": "Sergei Gribovskii",
+  "license": "MIT"
+}
