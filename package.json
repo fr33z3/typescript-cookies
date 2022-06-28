@@ -4,12 +4,32 @@
   "description": "Typescript cookies module",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "eslint ./"
   },
   "keywords": [
     "typescript",
     "cookies"
   ],
   "author": "Sergei Gribovskii",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^28.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-prettier": "^4.1.0",
+    "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
+    "jsdom": "^20.0.0",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4"
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }

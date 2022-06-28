@@ -1,0 +1,33 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier", "jest"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "bracketSameLine": false,
+        "jsxSingleQuote": false,
+        "printWidth": 100,
+        "proseWrap": "always",
+        "quoteProps": "as-needed",
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5",
+        "useTabs": false,
+        "endOfLine": "auto"
+      }
+    ]    
+  }
+}
