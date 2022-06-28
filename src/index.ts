@@ -36,7 +36,7 @@ export class Cookies {
 
     cookieString = `${cookieString};path=${path}`
     if (domain) cookieString = `${cookieString};domain=${domain}`
-    if (maxAge) cookieString = `${cookieString};max-age-in-seconds=${maxAge}`
+    if (maxAge) cookieString = `${cookieString};max-age=${maxAge}`
     if (expires) {
       const date =
         typeof expires === 'number' ? new Date(Date.now() + expires * daysPower) : expires
@@ -48,7 +48,7 @@ export class Cookies {
   }
 
   remove(name: string) {
-    this.doc.cookie = `${name}=;expires=${new Date(0).toUTCString()};max-age-in-seconds=-99999999`
+    this.doc.cookie = `${name}=;expires=${new Date(0).toUTCString()};max-age=-99999999`
   }
 }
 
