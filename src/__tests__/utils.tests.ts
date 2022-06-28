@@ -1,4 +1,4 @@
-import {compact} from '../utils'
+import { compact } from '../utils'
 
 describe('Utils', () => {
   describe('compact', () => {
@@ -8,6 +8,6 @@ describe('Utils', () => {
 
     it('returns compacted array', () => {
       expect(compact(['', null, '1', null, '2'])).toEqual(['', '1', '2'])
-    })    
+    })
   })
 })

@@ -2,7 +2,7 @@ import { compact } from './utils'
 
 const daysPower = 24 * 60 * 60 * 1000
 
-type SetOptions = {
+type Options = {
   expires?: number | Date
   maxAge?: number
   path?: string
@@ -19,9 +19,12 @@ function getExpirationDateStr(value: number | Date): string {
 
 export class Cookies {
   doc: Document
+  options: Options
 
-  constructor(doc: Document) {
-    this.doc = doc
+  constructor(config?: Options & { document: Document }) {
+    const { document, ...options } = config ?? {}
+    this.options = options ?? {}
+    this.doc = document ?? window.document
   }
 
   get(name: string): string | undefined {
@@ -38,9 +41,16 @@ export class Cookies {
     return cookies[name]
   }
 
-  set(name: string, value: string, options: SetOptions = {}) {
-    const { expires, maxAge, path = '/', domain, secure, samesite } = options
-    
+  set(name: string, value: string, options: Options = {}) {
+    const {
+      expires,
+      maxAge,
+      path = '/',
+      domain,
+      secure,
+      samesite,
+    } = { ...this.options, ...options }
+
     const cookieString = compact([
       `${name}=${encodeURIComponent(value)}`,
       `path=${path}`,
@@ -59,5 +69,5 @@ export class Cookies {
   }
 }
 
-const documentCookies = new Cookies(window.document)
+const documentCookies = new Cookies()
 export default documentCookies
