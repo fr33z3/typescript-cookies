@@ -126,6 +126,29 @@ describe('Cookie', () => {
     )
   })
 
+  it('does not include secure if secure set to false', () => {
+    const cookieSetter = jest.fn()
+    const expires = new Date('Tue Jun 28 2022 11:07:45 GMT+0200')
+    const document = getDOMDocument('/')
+    Object.defineProperty(document, 'cookie', {
+      set: cookieSetter,
+    })
+    const cookies = new Cookies({
+      document,
+      path: '/another-path',
+      domain: 'example.com',
+      maxAge: 1,
+      expires,
+      secure: false,
+      samesite: 'strict',
+    })
+
+    cookies.set('key', 'value')
+    expect(cookieSetter).toHaveBeenCalledWith(
+      'key=value;path=/another-path;domain=example.com;max-age=1;expires=Tue, 28 Jun 2022 09:07:45 GMT;secure;samesite=strict'
+    )
+  })
+
   it('uses global configuration set after initialization', () => {
     const cookieSetter = jest.fn()
     const expires = new Date('Tue Jun 28 2022 11:07:45 GMT+0200')
