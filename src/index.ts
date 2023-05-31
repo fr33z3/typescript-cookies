@@ -65,7 +65,12 @@ export class Cookies {
   }
 
   remove(name: string) {
-    this.doc.cookie = `${name}=;expires=${new Date(0).toUTCString()};max-age=-99999999`
+    this.doc.cookie = [
+      `${name}=`,
+      `expires=${new Date(0).toUTCString()}`,
+      'max-age=-99999999',
+      `path=${this.options.path}`,
+    ].join(';')
   }
 }
 

@@ -145,7 +145,7 @@ describe('Cookie', () => {
 
     cookies.set('key', 'value')
     expect(cookieSetter).toHaveBeenCalledWith(
-      'key=value;path=/another-path;domain=example.com;max-age=1;expires=Tue, 28 Jun 2022 09:07:45 GMT;secure;samesite=strict'
+      'key=value;path=/another-path;domain=example.com;max-age=1;expires=Tue, 28 Jun 2022 09:07:45 GMT;samesite=strict'
     )
   })
 
